@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf22468f8c6d354f9c8439bf604a868, type: 3}
+  m_Name: CubeSpawnerData
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 692042524063533686, guid: 11b04babc5495204691628062d0c6df6, type: 3}
+  _numbers: {fileID: 11400000, guid: 914ccc498d94b83488e22d946201baf0, type: 2}
+  _colors: {fileID: 11400000, guid: 4303a82b85b116f488fee4f3319a78dc, type: 2}
