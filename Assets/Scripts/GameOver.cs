@@ -20,7 +20,7 @@ public class GameOver : MonoBehaviour
         {
             timeOnLine += Time.deltaTime;
 
-            if (timeOnLine >= 3f)
+            if (timeOnLine >= 1f)
             {
                 Debug.Log("GameOver");
                 ShowLose();
@@ -29,6 +29,7 @@ public class GameOver : MonoBehaviour
     }
     public void ShowLose()
     {
+        Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
     }
     private void OnTriggerExit(Collider other)
