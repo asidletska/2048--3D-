@@ -1,22 +1,93 @@
+using System;
+using TMPro;
 using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    private int _value;
+    public event Action<Cube, Cube> Collide;
+    public ParticleSystem star;
+    public AudioSource audio;
+    public bool IsKinematic { get; private set; }
 
-    public int Value
+    public int Number
     {
-        get => _value; set { _value = value; _show.Change(_value); }
+        get => _number;
+        set => UpdateVisualNumber(_number = value);
+    }
+    private int _number;
+
+    public Color Color
+    {
+        get => _color;
+        set => UpdateVisualColor(_color = value);
+    }
+    private Color _color;
+
+    [Header("References")]
+    [SerializeField] private TMP_Text[] _textNumbers;
+
+    private Renderer _renderer;
+    private Rigidbody _rigidbody;
+
+    private void Awake()
+    {
+        _renderer = GetComponent<Renderer>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
-    [SerializeField]
-    private int _initialValue;
-
-    private CubeShow _show;
-
-    private void Start()
+    public void Initialize(int number, Color color)
     {
-        _show = GetComponent<CubeShow>();
-        Value = _initialValue;
+        Number = number;
+        Color = color;
+    }
+
+    public void Push(Vector3 direction, float force)
+    {
+        _rigidbody.AddForce(direction * force, ForceMode.Impulse);
+    }
+    public void Rotate(Vector3 torque)
+    {
+        _rigidbody.AddTorque(torque, ForceMode.Impulse);
+    }
+
+    public void EnableKinematic()
+    {
+        _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        IsKinematic = true;
+    }
+    public void DisableKinematic()
+    {
+        _rigidbody.constraints = RigidbodyConstraints.None;
+        IsKinematic = false;
+    }
+
+    private void UpdateVisualColor(Color color)
+    {
+        _renderer.material.color = color;
+    }
+    private void UpdateVisualNumber(int number)
+    {
+        foreach (var textField in _textNumbers)
+            textField.text = number.ToString();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Cube cube))
+            OnCollideWithCube(cube);
+    }
+    private void OnCollideWithCube(Cube cube)
+    {
+        if (cube.IsKinematic) return;
+
+        if (cube.Number == Number)
+            OnCollideWithSameNumberCube(cube);
+    }
+    private void OnCollideWithSameNumberCube(Cube cube)
+    {
+        Collide?.Invoke(this, cube);
+        star.Play();
+        audio.Play();
+        ScoreManager.Instance.AddScore(Number);
     }
 }
