@@ -6,20 +6,20 @@ public class Cube : MonoBehaviour
 {
     public event Action<Cube, Cube> Collide;
     public ParticleSystem star;
-    public AudioSource audio;
+    public new AudioSource audio;
     public bool IsKinematic { get; private set; }
 
     public int Number
     {
         get => _number;
-        set => UpdateVisualNumber(_number = value);
+        set => UpdateNumber(_number = value);
     }
     private int _number;
 
     public Color Color
     {
         get => _color;
-        set => UpdateVisualColor(_color = value);
+        set => UpdateColor(_color = value);
     }
     private Color _color;
 
@@ -61,11 +61,11 @@ public class Cube : MonoBehaviour
         IsKinematic = false;
     }
 
-    private void UpdateVisualColor(Color color)
+    private void UpdateColor(Color color)
     {
         _renderer.material.color = color;
     }
-    private void UpdateVisualNumber(int number)
+    private void UpdateNumber(int number)
     {
         foreach (var textField in _textNumbers)
             textField.text = number.ToString();
@@ -81,9 +81,9 @@ public class Cube : MonoBehaviour
         if (cube.IsKinematic) return;
 
         if (cube.Number == Number)
-            OnCollideWithSameNumberCube(cube);
+            OnCollideWithSameNumber(cube);
     }
-    private void OnCollideWithSameNumberCube(Cube cube)
+    private void OnCollideWithSameNumber(Cube cube)
     {
         Collide?.Invoke(this, cube);
         star.Play();

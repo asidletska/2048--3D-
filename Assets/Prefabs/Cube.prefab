@@ -171,15 +171,48 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8437417281645655297}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b058024759fee84a89fdff888ba0ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 30
-  throwForce: 1000
-  minX: -10
-  maxX: 10
+  throwForce: 30
+  cubeTransform: {fileID: 4751163427635479831}
+  cubeRb: {fileID: 692042524063533686}
+  touchInput:
+    m_Name: Touch Input
+    m_Type: 2
+    m_ExpectedControlType: Button
+    m_Id: 9a1be9d1-ba1d-4783-910b-a659d241187a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 0291c6ee-a18f-4b1c-a9b6-5be8ac4b156b
+      m_Path: <Touchscreen>/primaryTouch/press
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch Input
+      m_Flags: 0
+    m_Flags: 0
+  touchPosition:
+    m_Name: Touch Position
+    m_Type: 2
+    m_ExpectedControlType: Vector2
+    m_Id: 3939c7f6-e97b-4320-839e-958246343544
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: e4f0b08c-e953-4200-8c98-205b9809338b
+      m_Path: <Touchscreen>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch Position
+      m_Flags: 0
+    m_Flags: 0
 --- !u!82 &6703612553779369044
 AudioSource:
   m_ObjectHideFlags: 0

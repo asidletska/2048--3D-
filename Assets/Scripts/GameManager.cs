@@ -1,12 +1,10 @@
-using Game;
-using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private SpawnZoneCube spawnPoint;
     [SerializeField] private CubeConnectionCheck connectCheck;
-    [SerializeField] private CubeSling _sling;
+    [SerializeField] private CubeController _controller;
 
     private void Start()
     {
@@ -15,14 +13,14 @@ public class GameManager : MonoBehaviour
     public void NewGame()
     {
 
-        _sling.Detached += OnCubeDetach;
+        _controller.Detached += OnCubeDetach;
         connectCheck.Combined += OnCubeCombined;
 
         SpawnNewCube();
     }
     private void OnDisable()
     {
-        _sling.Detached -= OnCubeDetach;
+        _controller.Detached -= OnCubeDetach;
         connectCheck.Combined -= OnCubeCombined;
     }
 
@@ -35,7 +33,7 @@ public class GameManager : MonoBehaviour
     private void SpawnNewCube()
     {
         var cube = spawnPoint.SpawnRandom();
-        _sling.Attach(cube);
+        _controller.Attach(cube);
     }
 
     private void OnCubeCollide(Cube cube1, Cube cube2)

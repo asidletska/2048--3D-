@@ -1,56 +1,100 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody))]
 public class CubeController : MonoBehaviour
 {
-    public float moveSpeed = 20f;
+    public event Action<Cube> Detached;
+
     public float throwForce = 500f;
-    public float minX = -2.5f;
-    public float maxX = 2.5f;
 
-    private Rigidbody rb;
+    [SerializeField] private Transform cubeTransform;
+    [SerializeField] private Cube cubeRb;
+    [SerializeField] private InputAction touchInput;
+    [SerializeField] private InputAction touchPosition;
+
     private bool isDragging = false;
-    private bool isThrown = false;
+    private Camera mainCamera;
+    private float distanceFromCamera;
 
-    private Vector2 startTouchPosition;
+    private void OnEnable()
+    {
+        touchInput.Enable();
+        touchPosition.Enable();
+    }
+
+    private void OnDisable()
+    {
+        touchInput.Disable();
+        touchPosition.Disable();
+    }
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.isKinematic = true;
+        mainCamera = Camera.main;
+        distanceFromCamera = Mathf.Abs(mainCamera.transform.position.z - cubeTransform.position.z);
     }
 
     private void Update()
     {
-        if (isThrown) return;
-
-        if (Input.touchCount > 0)
+        if (HasTouch())
         {
-            Touch touch = Input.GetTouch(0);
-
-            // ќтримуЇмо позиц≥ю пальц€ у св≥тових координатах
-            float zDistance = Mathf.Abs(Camera.main.transform.position.z - transform.position.z);
-            Vector3 touchWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, zDistance));
-
-            // ѕерем≥щенн€ лише по X, обмежене minX та maxX
-            float clampedX = Mathf.Clamp(touchWorldPos.x, minX, maxX);
-            Vector3 targetPos = new Vector3(clampedX, transform.position.y, transform.position.z);
-
-            // ѕлавне перем≥щенн€ (без ф≥зики)
-            transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
-
-            //  оли палець в≥дпускаЇтьс€ Ч кидаЇмо кубик вперед
-            if (touch.phase == TouchPhase.Ended)
+            if (!isDragging)
             {
-                ThrowForward();
+                StartDrag();
             }
+
+            DragCube();
+        }
+        else if (isDragging)
+        {
+            EndDrag();
         }
     }
 
-    public void ThrowForward()
+    private bool HasTouch()
     {
-        isThrown = true;
-        rb.isKinematic = false;
-        rb.AddForce(Vector3.forward * throwForce);
+        return touchInput.ReadValue<float>() > 0f;
+    }
+
+    private Vector3 GetTouchWorldPosition()
+    {
+        Vector2 screenTouchPos = touchPosition.ReadValue<Vector2>();
+        Vector3 screenPoint = new Vector3(screenTouchPos.x, screenTouchPos.y, distanceFromCamera);
+        Vector3 worldPos = mainCamera.ScreenToWorldPoint(screenPoint);
+        return worldPos;
+    }
+
+    private void StartDrag()
+    {
+        isDragging = true;
+        //Vector3 touchPos = GetTouchWorldPosition();
+        //dragOffset = cubeTransform.position - touchPos;
+    }
+
+    private void DragCube()
+    {
+        Vector3 touchPos = GetTouchWorldPosition();
+        Vector3 newPos = cubeTransform.position;
+        newPos.x = touchPos.x;
+
+        cubeTransform.position = newPos;
+    }
+    public void Attach(Cube cube)
+    {
+        cubeRb = cube;
+        cubeTransform = cube.transform;
+        cubeRb.EnableKinematic();
+
+    }
+    public void EndDrag()
+    {
+        isDragging = false;
+        cubeRb.DisableKinematic();
+        cubeRb.Push(Vector3.forward, throwForce);
+        Detached?.Invoke(cubeRb);
     }
 }
+
+
+
