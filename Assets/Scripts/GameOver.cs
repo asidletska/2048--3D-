@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
-    public GameObject gameOverPanel; // Панель програшу
+    public GameObject gameOverPanel;
     private float timeOnLine = 0f;
     public bool isOnLine = false;
 
@@ -22,7 +22,6 @@ public class GameOver : MonoBehaviour
 
             if (timeOnLine >= 1f)
             {
-                Debug.Log("GameOver");
                 ShowLose();
             }
         }
@@ -37,7 +36,7 @@ public class GameOver : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isOnLine = false;
-            timeOnLine = 0f; // Скидаємо таймер при виході
+            timeOnLine = 0f;
         }
     }
 

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3943068496082114094}
   - component: {fileID: 692042524063533686}
   - component: {fileID: 5725556480002878163}
-  - component: {fileID: -7071914681727862685}
   - component: {fileID: 6703612553779369044}
   m_Layer: 0
   m_Name: Cube
@@ -32,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8437417281645655297}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0025209985, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -164,55 +163,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-7071914681727862685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8437417281645655297}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b058024759fee84a89fdff888ba0ade, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  throwForce: 30
-  cubeTransform: {fileID: 4751163427635479831}
-  cubeRb: {fileID: 692042524063533686}
-  touchInput:
-    m_Name: Touch Input
-    m_Type: 2
-    m_ExpectedControlType: Button
-    m_Id: 9a1be9d1-ba1d-4783-910b-a659d241187a
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 0291c6ee-a18f-4b1c-a9b6-5be8ac4b156b
-      m_Path: <Touchscreen>/primaryTouch/press
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Touch Input
-      m_Flags: 0
-    m_Flags: 0
-  touchPosition:
-    m_Name: Touch Position
-    m_Type: 2
-    m_ExpectedControlType: Vector2
-    m_Id: 3939c7f6-e97b-4320-839e-958246343544
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: e4f0b08c-e953-4200-8c98-205b9809338b
-      m_Path: <Touchscreen>/position
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Touch Position
-      m_Flags: 0
-    m_Flags: 0
 --- !u!82 &6703612553779369044
 AudioSource:
   m_ObjectHideFlags: 0
@@ -222,7 +172,7 @@ AudioSource:
   m_GameObject: {fileID: 8437417281645655297}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4468043931177069126, guid: 0f64de5368e9a4b44b6f0156e97549e7, type: 2}
   m_audioClip: {fileID: 8300000, guid: 0db015700655e934893253a403d129fb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SpawnZoneCube spawnPoint;
     [SerializeField] private CubeConnectionCheck connectCheck;
     [SerializeField] private CubeController _controller;
+    public static bool isPaused = false;
 
     private void Start()
     {
@@ -26,12 +27,13 @@ public class GameManager : MonoBehaviour
 
     private void OnCubeDetach(Cube cube)
     {
+        if (isPaused) return;
         cube.Collide += OnCubeCollide;
-
         SpawnNewCube();
     }
     private void SpawnNewCube()
     {
+        if (isPaused) return;
         var cube = spawnPoint.SpawnRandom();
         _controller.Attach(cube);
     }

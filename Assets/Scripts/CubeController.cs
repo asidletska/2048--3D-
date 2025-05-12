@@ -68,8 +68,6 @@ public class CubeController : MonoBehaviour
     private void StartDrag()
     {
         isDragging = true;
-        //Vector3 touchPos = GetTouchWorldPosition();
-        //dragOffset = cubeTransform.position - touchPos;
     }
 
     private void DragCube()
@@ -91,7 +89,7 @@ public class CubeController : MonoBehaviour
     {
         isDragging = false;
         cubeRb.DisableKinematic();
-        cubeRb.Push(Vector3.forward, throwForce);
+        cubeRb.Throw(Vector3.forward, throwForce);
         Detached?.Invoke(cubeRb);
     }
 }

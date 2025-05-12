@@ -1,9 +1,5 @@
 ﻿using UnityEngine;
-
 using DG.Tweening;
-
-namespace Game.Extensions
-{
     static class CubeExtensions
     {
         public static Tween DOMove(this Cube cube, Vector3 endPosition, float duration)
@@ -31,4 +27,3 @@ namespace Game.Extensions
             );
         }
     }
-}

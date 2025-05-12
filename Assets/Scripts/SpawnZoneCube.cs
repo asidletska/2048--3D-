@@ -23,7 +23,7 @@ public class SpawnZoneCube : MonoBehaviour
     {
         var cube = Instantiate(_data.Prefab, position, Quaternion.identity);
         cube.Initialize(number, color);
-
+        _data.SpawnAnimation?.Animate(cube.transform);
         return cube;
     }
 }

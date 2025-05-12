@@ -23,7 +23,7 @@ public class Cube : MonoBehaviour
     }
     private Color _color;
 
-    [Header("References")]
+    [Header("Texts")]
     [SerializeField] private TMP_Text[] _textNumbers;
 
     private Renderer _renderer;
@@ -41,7 +41,7 @@ public class Cube : MonoBehaviour
         Color = color;
     }
 
-    public void Push(Vector3 direction, float force)
+    public void Throw(Vector3 direction, float force)
     {
         _rigidbody.AddForce(direction * force, ForceMode.Impulse);
     }

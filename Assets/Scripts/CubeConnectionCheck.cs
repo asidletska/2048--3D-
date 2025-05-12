@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using DG.Tweening;
-using Game.Extensions;
 
 public class CubeConnectionCheck : MonoBehaviour
 {
@@ -43,7 +42,7 @@ public class CubeConnectionCheck : MonoBehaviour
 
         Combined?.Invoke(cube1);
 
-        cube1.Push(Vector3.up, _data.PushUpForce);
+        cube1.Throw(Vector3.up, _data.PushUpForce);
         cube1.Rotate(UnityEngine.Random.rotation.eulerAngles);
     }
 

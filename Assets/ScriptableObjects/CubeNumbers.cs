@@ -4,13 +4,20 @@ using UnityEngine;
 class CubeNumbers : ScriptableObject
 {
     [SerializeField] private int _base = 2;
-    [SerializeField] private int _startPower = 1;
-    [SerializeField] private int _endPower = 6;
+    //[SerializeField] private int _startPower = 1;
+    //[SerializeField] private int _endPower = 6;
 
     public int Generate()
     {
-        var randomPower = Random.Range(_startPower, _endPower);
-        return GetNumber(randomPower);
+        int rand = Random.Range(0, 100);
+
+        int power;
+        if (rand < 75)
+            power = 1; 
+        else
+            power = 2; 
+
+        return GetNumber(power);
     }
     public int GenerateNext(int number)
     {

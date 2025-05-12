@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: CubeSpawnerData
   m_EditorClassIdentifier: 
   _prefab: {fileID: 692042524063533686, guid: 11b04babc5495204691628062d0c6df6, type: 3}
+  _spawnAnimation: {fileID: 11400000, guid: 8bde8ee83f6956b4babd34831ad87c3a, type: 2}
   _numbers: {fileID: 11400000, guid: 914ccc498d94b83488e22d946201baf0, type: 2}
   _colors: {fileID: 11400000, guid: 4303a82b85b116f488fee4f3319a78dc, type: 2}
